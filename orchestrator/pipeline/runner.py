@@ -2,21 +2,14 @@ import json
 import os
 from typing import Dict, Optional
 
-from orchestrator.config import DEFAULT_OUTPUT_DIR, DEFAULT_PROMPTS_FILE
+from orchestrator.config import DEFAULT_OUTPUT_DIR, load_prompts
 from orchestrator.browser.chatgpt import run_chatgpt_prompt
 from orchestrator.browser.claude import run_claude_prompt
 from orchestrator.execution.antigravity import run_antigravity_cli
 
 
-def load_prompts(prompts_path: Optional[str] = None) -> Dict[str, str]:
-    """Load prompt templates from JSON file."""
-    path = prompts_path or DEFAULT_PROMPTS_FILE
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
 def slugify_idea(idea: str) -> str:
-    """Generate a clean filesystem slug from the idea string."""
+    """Generate a clean filesystem slug from the project idea string."""
     slug = "".join(c if c.isalnum() else "_" for c in idea.lower())[:30].strip("_")
     return slug or "generated_project"
 

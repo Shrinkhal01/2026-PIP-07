@@ -15,7 +15,8 @@ ENV/
 .chrome-dev-profile/
 
 # Generated project workspaces
-output_projects/
+output_projects/*
+!output_projects/README.md
 
 # Operating System files
 .DS_Store
@@ -41,6 +42,3 @@ desktop.ini
 
 # Logs and runtime dumps
 *.log
-
-# removed my output project for the sake of privacy concerns
-./output_projects
