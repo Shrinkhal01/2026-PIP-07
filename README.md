@@ -1,31 +1,36 @@
-# 7-Phase Multi-Model Pipeline Orchestrator
+# 🚀 7-Phase Multi-Model Pipeline Orchestrator
 
-An automated software engineering pipeline that transforms a single high-level software idea into a fully implemented codebase by orchestrating **ChatGPT**, **Claude 3.5 Sonnet**, and **Google Antigravity CLI (`agy`)**.
+An autonomous software engineering pipeline that transforms a single high-level idea into a fully implemented, compiling, and tested codebase by orchestrating **ChatGPT**, **Claude 3.5 Sonnet**, and the **Google Antigravity CLI (`agy`)**.
 
-Instead of requiring paid API keys, the orchestrator connects directly to your authenticated Chrome browser session using Playwright and the Chrome DevTools Protocol (CDP).
+Instead of requiring paid API keys, the orchestrator connects directly to your authenticated Chrome browser session via Playwright using the Chrome DevTools Protocol (CDP).
 
 ---
 
-## Architecture Overview
+## 🏗️ Architecture Overview
 
 ```mermaid
 flowchart TD
-    UserIdea["User Idea (CLI / Argument)"] --> P1["Phase 1: ChatGPT (Architect)"]
-    P1 -->|"Meta-Prompt"| P2["Phase 2: Claude 3.5 Sonnet"]
-    P2 -->|"Structured JSON Blueprint"| P3["Phase 3: ChatGPT (Synthesizer)"]
-    P3 -->|"Actionable Execution Spec"| P4["Phases 4-7: Google Antigravity (agy)"]
-    P4 --> OutputCode["Complete Working Codebase (output_projects/)"]
+    UserIdea["💡 User Idea (CLI Argument)"] --> P1["Phase 1: ChatGPT (Chief Architect)"]
+    P1 -->|"Structured Meta-Prompt"| P2["Phase 2: Claude 3.5 Sonnet (System Architect)"]
+    P2 -->|"40+ KB Strict JSON Blueprint"| P3["Phase 3: ChatGPT (Synthesizer)"]
+    P3 -->|"Actionable Execution Spec"| P4["Phases 4–7: Google Antigravity (agy)"]
+    P4 --> OutputCode["📦 Complete Working Codebase (output_projects/)"]
 ```
 
 ### The 7 Phases
-* **Phase 1 (ChatGPT):** Acts as Chief Software Architect to analyze the idea and craft a structured, constraint-heavy meta-prompt tailored for Claude.
-* **Phase 2 (Claude 3.5 Sonnet):** Consumes Phase 1's prompt and generates a strict, modular JSON blueprint (`system_overview`, `folder_structure`, `components`, `dependencies`, `data_flow`).
-* **Phase 3 (ChatGPT):** Consumes Claude's architecture blueprint and compiles a concise, token-efficient, file-by-file execution prompt for Google Antigravity.
-* **Phases 4–7 (Google Antigravity `agy`):** Autonomous agent creates the directory structure, writes the source code, runs setup and dependency installation, executes tests, and verifies the build.
+
+| Phase | Model / Tool | Role & Responsibility |
+| :--- | :--- | :--- |
+| **Phase 1** | **ChatGPT** | **Chief Software Architect**: Analyzes the raw idea and crafts a structured, constraint-heavy meta-prompt tailored specifically for Claude. |
+| **Phase 2** | **Claude 3.5 Sonnet** | **System Architect**: Generates a strict, modular JSON blueprint containing `system_overview`, `folder_structure`, `components`, `dependencies`, and `data_flow`. |
+| **Phase 3** | **ChatGPT** | **Synthesizer / Spec Writer**: Compiles Claude's architecture blueprint into a token-efficient, file-by-file execution prompt for Google Antigravity. |
+| **Phases 4–7** | **Google Antigravity (`agy`)** | **Autonomous Implementer & Verifier**: Scaffolds directories, writes complete production source code, installs dependencies, runs test suites, and verifies the build. |
 
 ---
 
-## Installation
+## 📦 Installation
+
+Clone the repository and install runtime dependencies:
 
 ```bash
 # Clone the repository
@@ -38,62 +43,144 @@ pip install -r requirements.txt
 
 ---
 
-## Session Persistence: One-Time Sign-in
+## ⚡ How to Run the Pipeline (3 Steps)
 
-> **Do you have to sign in every time?**  
-> **No.** All sessions, cookies, and Cloudflare tokens are saved to the persistent profile directory (`~/.chrome-dev-profile`). As long as Chrome runs with this profile, you remain signed in across restarts.
+Follow these three straightforward steps to run the pipeline:
 
-### Starting the Chrome Session
-Use the cross-platform Python starter:
+### Step 1: Start Chrome with Remote Debugging
+Launch Google Chrome with remote debugging on port `9222` using the cross-platform starter:
+
 ```bash
-python start_browser.py
+python3 start_browser.py
 ```
-*(On macOS/Linux you can also run `./start_browser.sh`).*
+*(On macOS/Linux, you can also run `./start_browser.sh`).*
 
-Once Chrome opens:
-1. Ensure you are signed into [ChatGPT](https://chatgpt.com) and [Claude](https://claude.ai).
-2. Leave the Chrome window open. You will not need to sign in again in future runs.
+This automatically starts Chrome with a dedicated, persistent profile directory (`~/.chrome-dev-profile`).
 
 ---
 
-## Usage
+### Step 2: Sign In Once
+In the Chrome window that just opened:
+1. Navigate to **[ChatGPT](https://chatgpt.com)** and verify you are logged in.
+2. Navigate to **[Claude](https://claude.ai)** and verify you are logged in.
+3. Keep the browser window open.
 
-### Run the Full 7-Phase Pipeline
+> **Session Persistence**: All cookies, session tokens, and Cloudflare authorizations are saved to `~/.chrome-dev-profile`. You will **not** need to sign in again on future runs.
+
+---
+
+### Step 3: Run the Orchestrator
+Trigger the pipeline with your project idea:
+
+#### Full 7-Phase Run (Blueprint + Code Generation)
 ```bash
-python controller.py --idea "Build a CLI file manager in Rust"
+python3 controller.py --idea "Build a CLI file manager in Rust"
 ```
 
-### Inspect Prompts Only (Skip Antigravity Code Generation)
+#### Blueprint & Spec Review Only (Skip Antigravity Code Generation)
 If you want to review the generated architecture blueprint and specification without triggering local code generation:
 ```bash
-python controller.py --idea "Build a CLI file manager in Rust" --skip-antigravity
+python3 controller.py --idea "Build a CLI file manager in Rust" --skip-antigravity
 ```
 
 ---
 
-## Output Project Structure
+## 📂 Modular Repository Structure
 
-All intermediate outputs and final projects are saved under `./output_projects/<project_slug>/`:
+The codebase is organized into clean, modular components:
 
 ```text
-output_projects/build_a_cli_file_manager_in_/
-├── phase_1_prompt.txt     # Input sent to ChatGPT
-├── phase_1_output.txt     # Meta-prompt produced by ChatGPT
-├── phase_2_prompt.txt     # Input sent to Claude
-├── phase_2_output.json    # Complete architecture blueprint from Claude
-├── phase_3_prompt.txt     # Input sent to ChatGPT
-├── phase_3_output.md      # Actionable Antigravity specification
-└── [Project Source Code]  # Generated by Google Antigravity (Cargo.toml, src/, etc.)
+pipeline-orchestrator/
+├── controller.py                 # Main CLI entrypoint for orchestrator execution
+├── start_browser.py              # CLI helper to launch Chrome with CDP enabled
+├── start_browser.sh              # Unix shell shortcut for start_browser.py
+├── login_setup.py                # First-time interactive authentication launcher
+├── browser_driver.py             # Backwards-compatible import wrapper
+├── prompts.json                  # Prompt templates for Phases 1, 2, and 3
+├── requirements.txt              # Project dependencies (playwright)
+│
+├── orchestrator/                 # Core modular package
+│   ├── __init__.py               # Package exports and version metadata
+│   ├── config.py                 # Configuration constants, paths, and defaults
+│   ├── pipeline.py               # 7-phase coordinator and artifact persistence
+│   │
+│   ├── browser/                  # Browser automation subsystem
+│   │   ├── __init__.py           # Browser module exports
+│   │   ├── launcher.py           # Cross-platform Chrome discovery & process management
+│   │   ├── connection.py         # Playwright CDP connection handling
+│   │   ├── chatgpt.py            # ChatGPT prompt delivery, streaming, and extraction
+│   │   └── claude.py             # Claude prompt delivery, streaming, and extraction
+│   │
+│   └── execution/                # Local CLI code generation subsystem
+│       ├── __init__.py           # Execution module exports
+│       └── antigravity.py        # Antigravity CLI (agy) detection and live streaming
+│
+└── output_projects/              # Generated projects and intermediate artifacts
+    └── <project_slug>/
+        ├── phase_1_prompt.txt    # Input sent to ChatGPT
+        ├── phase_1_output.txt    # Meta-prompt produced by ChatGPT
+        ├── phase_2_prompt.txt    # Input sent to Claude
+        ├── phase_2_output.json   # 40+ KB strict JSON architecture blueprint
+        ├── phase_3_prompt.txt    # Input sent to ChatGPT
+        ├── phase_3_output.md     # Actionable Antigravity execution specification
+        └── <codebase>/           # Complete working code generated by Antigravity
 ```
 
 ---
 
-## File Reference
+## 🔍 Verified Example: Rust File Manager (`rfm`)
 
-* [controller.py](file:///Users/shrinkhals/Shrinkhal-Github/pipeline-orchestrator/controller.py): The main command-line entrypoint and phase orchestrator.
-* [browser_driver.py](file:///Users/shrinkhals/Shrinkhal-Github/pipeline-orchestrator/browser_driver.py): Playwright browser automation driver connecting to Chrome on port 9222.
-* [start_browser.py](file:///Users/shrinkhals/Shrinkhal-Github/pipeline-orchestrator/start_browser.py): Cross-platform script to launch Chrome with remote debugging enabled.
-* [start_browser.sh](file:///Users/shrinkhals/Shrinkhal-Github/pipeline-orchestrator/start_browser.sh): Shell wrapper for macOS/Linux users.
-* [login_setup.py](file:///Users/shrinkhals/Shrinkhal-Github/pipeline-orchestrator/login_setup.py): Quick launcher for first-time session authentication.
-* [prompts.json](file:///Users/shrinkhals/Shrinkhal-Github/pipeline-orchestrator/prompts.json): The prompt templates for Phase 1, Phase 2, and Phase 3.
-* [requirements.txt](file:///Users/shrinkhals/Shrinkhal-Github/pipeline-orchestrator/requirements.txt): Runtime dependencies (`playwright`).
+The pipeline has been verified on a complex systems engineering task:
+`"Build a CLI file manager in Rust"`.
+
+The pipeline successfully executed all phases:
+1. **Phase 1**: Produced a structured meta-prompt establishing hexagonal architecture constraints.
+2. **Phase 2**: Claude generated a 46 KB JSON architecture detailing Domain, Application, Presentation, and Infrastructure layers.
+3. **Phase 3**: ChatGPT assembled a 1,266-line implementation specification.
+4. **Phases 4–7**: Google Antigravity constructed the crate [`rfm`](output_projects/build_a_cli_file_manager_in_ru/rfm):
+   * **Compilation**: `cargo check` built successfully with 0 errors.
+   * **Unit Tests**: `cargo test` ran and passed all tests:
+     ```text
+     running 3 tests
+     test domain::tests::test_entry_kind_display ... ok
+     test domain::tests::test_root_deletion_protection ... ok
+     test domain::tests::test_copy_into_self_detection ... ok
+     test result: ok. 3 passed; 0 failed; 0 ignored
+     ```
+   * **CLI Execution**: Subcommands (`rfm ls`, `rfm stat`, `rfm mkdir`, `rfm cp`, `rfm mv`, `rfm rm`, `rfm repl`) operate seamlessly.
+
+---
+
+## ⚙️ Advanced CLI Options
+
+You can customize execution with optional flags:
+
+```bash
+python3 controller.py --help
+
+options:
+  -h, --help            Show this help message and exit
+  --idea IDEA           High-level project idea description to design and generate
+  --skip-antigravity    Skip Phases 4-7 (stops after producing Phase 3 architecture spec)
+  --output-dir DIR      Custom output directory (default: ./output_projects)
+  --prompts FILE        Custom prompts.json file path
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### 1. `Could not connect to Chrome on port 9222`
+Ensure Chrome was started with the debug flag:
+```bash
+python3 start_browser.py
+```
+If Chrome is already open from an everyday session, close it and run `python3 start_browser.py` so Chrome starts with `--remote-debugging-port=9222`.
+
+### 2. Cloudflare or Bot Challenge
+If ChatGPT or Claude displays a "Verify you are human" challenge:
+Simply complete the checkbox in the opened Chrome window. Because the profile directory is persistent (`~/.chrome-dev-profile`), the clearance token is remembered for subsequent runs.
+
+### 3. `'agy' command not found`
+Ensure Google Antigravity CLI (`agy`) is installed and available in your `PATH` or in `~/.local/bin/agy`.
+If you only want to generate prompts and blueprints without running the local agent, pass `--skip-antigravity`.
