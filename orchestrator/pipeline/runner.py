@@ -17,6 +17,7 @@ def slugify_idea(idea: str) -> str:
 async def run_pipeline(
     idea: str,
     skip_antigravity: bool = False,
+    auto_approve: bool = False,
     output_dir: Optional[str] = None,
     prompts_path: Optional[str] = None,
 ) -> str:
@@ -83,6 +84,6 @@ async def run_pipeline(
         print("\n[--skip-antigravity flag set: Skipping local CLI code generation.]")
         print(f"Specification markdown ready for review at:\n  {p3_output_file}\n")
     else:
-        run_antigravity_cli(workspace, p3_output)
+        run_antigravity_cli(workspace, p3_output, auto_approve=auto_approve)
 
     return workspace

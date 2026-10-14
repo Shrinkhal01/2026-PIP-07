@@ -21,7 +21,7 @@ def find_agy_binary() -> str:
     return "agy"
 
 
-def run_antigravity_cli(workspace_path: str, task_prompt: str) -> int:
+def run_antigravity_cli(workspace_path: str, task_prompt: str, auto_approve: bool = False) -> int:
     """
     Invoke Google Antigravity CLI (agy) inside the target workspace.
     Streams output in real-time. Returns the process returncode.
@@ -30,7 +30,14 @@ def run_antigravity_cli(workspace_path: str, task_prompt: str) -> int:
     print(f"\n[Phase 4-7] Invoking Google Antigravity CLI in: {workspace_path}\n", flush=True)
 
     agy_bin = find_agy_binary()
-    cmd = [agy_bin, "-p", task_prompt, "--dangerously-skip-permissions"]
+    cmd = [agy_bin, "-p", task_prompt]
+
+    if auto_approve:
+        print("[!] SECURITY WARNING: Auto-approval is active (--dangerously-skip-permissions).", flush=True)
+        print("    Antigravity will execute commands and file operations without interactive confirmation.\n", flush=True)
+        cmd.append("--dangerously-skip-permissions")
+    else:
+        print("[*] Safe mode active: Standard permission checks are enabled for command execution.\n", flush=True)
 
     try:
         # Inherit stdout and stderr directly so live animations, colors, and progress stream in real time

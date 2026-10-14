@@ -65,14 +65,20 @@ def launch_chrome(port: int = DEFAULT_PORT, profile_dir: str = DEFAULT_PROFILE_D
         return 1
 
     os.makedirs(profile_dir, exist_ok=True)
+    if platform.system() != "Windows":
+        try:
+            os.chmod(profile_dir, 0o700)
+        except OSError:
+            pass
+
     print(f"[*] Starting Chrome from: {chrome_bin}")
-    print(f"[*] Profile directory: {profile_dir}")
+    print(f"[*] Profile directory: {profile_dir} (permissions restricted to 0700)")
 
     cmd = [
         chrome_bin,
         f"--remote-debugging-port={port}",
         f"--user-data-dir={profile_dir}",
-        "--remote-allow-origins=*",
+        f"--remote-allow-origins=http://127.0.0.1:{port},http://localhost:{port}",
     ]
 
     system = platform.system()

@@ -171,9 +171,34 @@ options:
   -h, --help            Show this help message and exit
   --idea IDEA           High-level project idea description to design and generate
   --skip-antigravity    Skip Phases 4-7 (stops after producing Phase 3 architecture spec)
+  --auto-approve        Bypass interactive permission checks during Antigravity execution (uses --dangerously-skip-permissions)
   --output-dir DIR      Custom output directory (default: ./output_projects)
   --prompts FILE        Custom prompts.json file path
 ```
+
+---
+
+## 🛡️ Security & Privacy Architecture
+
+This project is built with defensive defaults to protect your machine, browser sessions, and intellectual property:
+
+### 1. Restricted Chrome DevTools Protocol (CDP) Origins
+* **Origin Isolation**: The browser launcher restricts allowed CDP origins to `http://127.0.0.1:9222` and `http://localhost:9222` instead of using wildcards (`*`). This prevents external or malicious web pages from initiating unauthorized WebSocket connections to your debugging port.
+* **Dedicated Browser Instance**: Always keep the automated Chrome instance strictly dedicated to ChatGPT and Claude. Do not use this window for everyday browsing, banking, or email.
+
+### 2. Hardened Profile Permissions (`0700`)
+* The persistent profile directory (`~/.chrome-dev-profile`) stores session cookies and Cloudflare tokens. On Unix/macOS, it is automatically created and restricted to permission mode `0700` (`rwx------`), preventing other local user accounts from reading your session data.
+
+### 3. Safe Execution by Default (Human-in-the-Loop)
+* Google Antigravity CLI (`agy`) runs in **safe mode with interactive confirmations enabled** by default. Commands and disk modifications require approval before execution.
+* If you are running a completely trusted idea in an isolated sandbox, you can opt into autonomous execution with `--auto-approve`.
+
+### 4. LLM Data Privacy & Training Disclosures
+* The pipeline transmits project ideas, specifications, and architecture blueprints to **OpenAI (ChatGPT)** and **Anthropic (Claude)**.
+* If you are developing proprietary or confidential software, disable model training in your accounts:
+  * **ChatGPT**: *Settings* ➔ *Data Controls* ➔ Disable *Chat history & training*.
+  * **Claude**: *Settings* ➔ *Privacy* ➔ Ensure data training opt-out is enabled.
+
 
 ---
 

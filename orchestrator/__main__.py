@@ -39,6 +39,11 @@ Examples:
         help="Skip Phases 4-7 (stops after producing Phase 3 architecture spec)",
     )
     parser.add_argument(
+        "--auto-approve",
+        action="store_true",
+        help="Bypass interactive permission checks during Antigravity execution (uses --dangerously-skip-permissions). Use with caution on trusted ideas.",
+    )
+    parser.add_argument(
         "--output-dir",
         type=str,
         default=None,
@@ -59,6 +64,7 @@ async def main(args=None):
         await run_pipeline(
             idea=parsed.idea,
             skip_antigravity=parsed.skip_antigravity,
+            auto_approve=parsed.auto_approve,
             output_dir=parsed.output_dir,
             prompts_path=parsed.prompts,
         )

@@ -23,5 +23,7 @@ This module manages the execution of local code generation agents, specifically 
    - `%USERPROFILE%\.local\bin\agy.cmd` (Windows)
    - `%USERPROFILE%\AppData\Local\Programs\agy\agy.exe` (Windows)
 
-2. **Autonomous Execution (`--dangerously-skip-permissions`)**:
-   Runs the agent inside the targeted project folder with full terminal output streaming, allowing the user to watch Antigravity create files, run test suites, and repair compilation errors in real-time.
+2. **Safe Execution by Default (Opt-in `--auto-approve`)**:
+   Runs the agent inside the targeted project folder with full terminal output streaming.
+   By default, standard interactive permission checks are enforced.
+   When `auto_approve=True` (via `--auto-approve`), the agent bypasses prompts with `--dangerously-skip-permissions` for fully unattended runs.
