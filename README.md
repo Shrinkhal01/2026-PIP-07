@@ -5,9 +5,9 @@ An autonomous software engineering pipeline that transforms a single high-level 
 Instead of requiring paid API keys, the orchestrator connects directly to your authenticated Chrome browser session via Playwright using the Chrome DevTools Protocol (CDP).
 
 <p align="center">
-  <img src="Octo-Pipeline.jpg" alt="PIP-07: The Pipeline Guardian (Octo-Pipeline)" width="100%" />
+  <img src="Octo-Pipeline.jpg" alt="PIP-07 — Octo-Pipeline: 7-Phase Autonomous Pipeline Orchestrator" width="100%" />
   <br>
-  <em>Meet <strong>PIP-07 ("Octo-Pipeline")</strong> — The Autonomous Pipeline Guardian orchestrating the 7 phases of software engineering.</em>
+  <em>Meet <strong>PIP-07 ("Octo-Pipeline")</strong> — The Autonomous 7-Phase Software Engineering Pipeline Orchestrator.</em>
 </p>
 
 ---
@@ -99,7 +99,7 @@ The codebase is organized into self-documenting, modular folders where each fold
 
 ```text
 pipeline-orchestrator/
-├── Octo-Pipeline.jpg             # Project mascot / architectural illustration
+├── Octo-Pipeline.jpg             # Project logo & pipeline symbol
 ├── controller.py                 # Primary CLI entrypoint (delegates to orchestrator)
 ├── requirements.txt              # Project dependencies (playwright)
 │
