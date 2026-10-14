@@ -1,5 +1,0 @@
-{
-    "phase_1_chatgpt": "You are a Chief Software Architect. Analyze the following project idea: \"{user_idea}\". Generate a concise, structured system prompt designed for Claude 3.5 Sonnet to design a modular system architecture. Specify that Claude must respond ONLY in strict JSON with fields: 'system_overview', 'folder_structure', 'components', 'dependencies', and 'data_flow'. Do not include conversational fluff.",
-    "phase_2_claude": "Design a complete, modular system architecture based on this instruction: {phase_1_output}. Output strictly valid JSON matching the requested structure.",
-    "phase_3_chatgpt": "Given this system architecture output from Claude:\n{phase_2_output}\n\nGenerate an actionable specification prompt for an AI agent (Google Antigravity) to build the complete project. Include file-by-file requirements, terminal setup instructions, and error-handling priorities. Keep it concise, structured, and token-efficient."
-}
