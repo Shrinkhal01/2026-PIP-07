@@ -6,8 +6,9 @@ The `orchestrator` package contains the core business logic, browser automation 
 
 ## 📁 Submodules in this Package
 
-| Subfolder | What Files Are in Them | Responsibility |
+| Subfolder / File | What Files Are in Them | Responsibility |
 | :--- | :--- | :--- |
+| **[`__main__.py`](__main__.py)** | CLI module entrypoint | Enables running directly via `python -m orchestrator --idea "..."`. |
 | **[`config/`](config/)** | [`settings.py`](config/settings.py), [`prompt_loader.py`](config/prompt_loader.py) | Manages system constants (ports, timeouts, paths) and prompt template parsing. |
 | **[`browser/`](browser/)** | [`launcher.py`](browser/launcher.py), [`connection.py`](browser/connection.py), [`chatgpt.py`](browser/chatgpt.py), [`claude.py`](browser/claude.py) | Connects to Chrome via CDP, automates ChatGPT and Claude 3.5 Sonnet tabs, and scrapes stream results. |
 | **[`execution/`](execution/)** | [`antigravity.py`](execution/antigravity.py) | Discovers Google Antigravity CLI (`agy`) binary and executes Phases 4–7 code generation. |

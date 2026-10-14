@@ -8,5 +8,5 @@ async def connect_browser(playwright_instance: Playwright, cdp_url: str = DEFAUL
         return await playwright_instance.chromium.connect_over_cdp(cdp_url)
     except Exception as e:
         print(f"\n[!] Could not connect to Chrome over CDP at {cdp_url}.")
-        print("Run: python start_browser.py (or ./start_browser.sh on macOS/Linux)")
+        print("Run: python3 scripts/start_browser.py (or ./scripts/start_browser.sh on macOS/Linux)")
         raise e

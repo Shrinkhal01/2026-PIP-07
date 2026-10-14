@@ -51,9 +51,9 @@ Follow these three straightforward steps to run the pipeline:
 Launch Google Chrome with remote debugging on port `9222` using the cross-platform starter:
 
 ```bash
-python3 start_browser.py
+python3 scripts/start_browser.py
 ```
-*(On macOS/Linux, you can also run `./start_browser.sh`).*
+*(On macOS/Linux, you can also run `./scripts/start_browser.sh`).*
 
 This automatically starts Chrome with a dedicated, persistent profile directory (`~/.chrome-dev-profile`).
 
@@ -75,6 +75,8 @@ Trigger the pipeline with your project idea:
 #### Full 7-Phase Run (Blueprint + Code Generation)
 ```bash
 python3 controller.py --idea "Build a CLI file manager in Rust"
+# Alternatively via module:
+python3 -m orchestrator --idea "Build a CLI file manager in Rust"
 ```
 
 #### Blueprint & Spec Review Only (Skip Antigravity Code Generation)
@@ -91,12 +93,7 @@ The codebase is organized into self-documenting, modular folders where each fold
 
 ```text
 pipeline-orchestrator/
-├── controller.py                 # Primary CLI entrypoint for orchestrator execution
-├── start_browser.py              # CLI helper to launch Chrome with CDP enabled
-├── start_browser.sh              # Unix shell shortcut for start_browser.py
-├── login_setup.py                # First-time interactive authentication launcher
-├── browser_driver.py             # Backwards-compatible import wrapper
-├── prompts.json                  # Prompt templates for Phases 1, 2, and 3
+├── controller.py                 # Primary CLI entrypoint (delegates to orchestrator)
 ├── requirements.txt              # Project dependencies (playwright)
 │
 ├── prompts/                      # 📝 Prompt templates and model specifications
@@ -112,6 +109,7 @@ pipeline-orchestrator/
 ├── orchestrator/                 # 📦 Core pipeline Python package
 │   ├── README.md                 # Explains orchestrator package architecture
 │   ├── __init__.py               # Package exports and version metadata
+│   ├── __main__.py               # Package CLI entrypoint (python -m orchestrator)
 │   │
 │   ├── config/                   # ⚙️ Configuration constants & prompt loading
 │   │   ├── README.md             # Explains config settings and loaders
@@ -184,9 +182,9 @@ options:
 ### 1. `Could not connect to Chrome on port 9222`
 Ensure Chrome was started with the debug flag:
 ```bash
-python3 start_browser.py
+python3 scripts/start_browser.py
 ```
-If Chrome is already open from an everyday session, close it and run `python3 start_browser.py` so Chrome starts with `--remote-debugging-port=9222`.
+If Chrome is already open from an everyday session, close it and run `python3 scripts/start_browser.py` (or `./scripts/start_browser.sh`) so Chrome starts with `--remote-debugging-port=9222`.
 
 ### 2. Cloudflare or Bot Challenge
 If ChatGPT or Claude displays a "Verify you are human" challenge:
