@@ -1,14 +1,14 @@
 # 🚀 7-Phase Multi-Model Pipeline Orchestrator
 
-An autonomous software engineering pipeline that transforms a single high-level idea into a fully implemented, compiling, and tested codebase by orchestrating **ChatGPT**, **Claude 3.5 Sonnet**, and the **Google Antigravity CLI (`agy`)**.
-
-Instead of requiring paid API keys, the orchestrator connects directly to your authenticated Chrome browser session via Playwright using the Chrome DevTools Protocol (CDP).
-
 <p align="center">
   <img src="assets/pip07_icon.png" alt="PIP-07: Octo-Pipeline" width="128" height="128" />
   <br>
   <em>Meet <strong>PIP-07 ("Octo-Pipeline")</strong> — The Autonomous 7-Phase Software Engineering Pipeline Orchestrator.</em>
 </p>
+
+An autonomous software engineering pipeline that transforms a single high-level idea into a fully implemented, compiling, and tested codebase by orchestrating **ChatGPT**, **Claude 3.5 Sonnet**, and the **Google Antigravity CLI (`agy`)**.
+
+Instead of requiring paid API keys, the orchestrator connects directly to your authenticated Chrome browser session via Playwright using the Chrome DevTools Protocol (CDP).
 
 ---
 
